@@ -202,7 +202,29 @@
     Todos os direitos reservados - 2025 - PP
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyD_PedNois7ob95dETaRnfpcOERWiTrPTE",
+        authDomain: "login-1fae6.firebaseapp.com",
+        projectId: "login-1fae6",
+        storageBucket: "login-1fae6.firebasestorage.app",
+        messagingSenderId: "471575613590",
+        appId: "1:471575613590:web:cdbf384b8b8ac2bc3b32b7"
+    };
+
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Verifica se o usuário está autenticado
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = "/index.html"; // Redireciona para o login se não estiver autenticado
+        }
+    });
 
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
