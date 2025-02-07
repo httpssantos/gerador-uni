@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="imagex/jpeg" href="https://internetmais.net/wp-content/uploads/2018/05/Logo_internet_MAIS.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Gerador de OS</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: radial-gradient( circle farthest-corner at 7.2% 13.6%,  rgba(37,249,245,1) 0%, rgba(8,70,218,1) 90% );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        width: 100%;
+        max-width: 800px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+        font-size: 20px;
+        margin: 0;
+    }
+    .clear-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: #1973da;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .clear-btn:hover {
+        background-color: #0e84e4;
+    }
+    .form-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .form-group {
+        flex: 1;
+        min-width: 150px;
+    }
+    label {
+        font-weight: 500;
+        color: #333;
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    .generate-btn {
+        background-color: #0c7ae0;
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 15px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .generate-btn:hover {
+        background-color: #3389eb;
+    }
+    .output {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-radius: 4px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        font-size: 13px;
+    }
+    .copy-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 13px;
+    }
+    .copy-btn:hover {
+        background-color: #0056b3;
+    }
+    /* Responsividade para telas menores */
+    @media (max-width: 600px) {
+        .form-row {
+            flex-direction: column;
+        }
+    }
+    footer {
+            width: 100%;
+            text-align: center;
+            padding: 3px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-size: 14px;
+        }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Gerador de OS</h1>
+    <button class="clear-btn" onclick="limparDados()">Limpar Dados</button>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <select id="titulo">
+                <option value="Atenuação">Atenuação</option>
+                <option value="Rompimento">Rompimento</option>
+                <option value="Visita técnica">Visita técnica</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="idOs">ID OS</label>
+            <input type="text" id="idOs" required>
+        </div>
+        <div class="form-group">
+            <label for="cliente">Cliente</label>
+            <input type="text" id="cliente" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <input type="text" id="descricao" required>
+        </div>
+        <div class="form-group">
+            <label for="periodo">Período</label>
+            <select id="periodo">
+                <option value="Manhã">Manhã</option>
+                <option value="Tarde">Tarde</option>
+                <option value="Qualquer">Qualquer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" id="data" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="obs">Observação</label>
+            <input type="text" id="obs" required>
+        </div>
+        <div class="form-group">
+            <label for="endereco">Endereço</label>
+            <input type="text" id="endereco" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
+        </div>        
+        <div class="form-group">
+            <label for="atendente">Atendente</label>
+            <select id="atendente">
+                <option value="Pedro">Pedro</option>
+                <option value="Vinicius">Vinicius</option>
+                <option value="Paulo">Paulo</option>
+                <option value="Thayza">Thayza</option>
+            </select>
+        </div>
+    </div>
+    <button class="generate-btn" onclick="gerarScript()">Gerar Script</button>
+    <div class="output" id="output"></div>
+    <button class="copy-btn" id="copyButton" onclick="copiarScript()" style="display:none;">Copiar Script</button>
+</div>
+<footer>
+    Todos os direitos reservados - 2025 - PP
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    if (!localStorage.getItem("authToken")) {
+    window.location.href = "/index.html";
+}
+    flatpickr("#data", {
+        locale: "pt",
+        dateFormat: "d/m",
+        altInput: true,
+        altFormat: "d/m",
+    });
+    function gerarScript() {
+        const titulo = document.getElementById('titulo').value;
+        const idOs = document.getElementById('idOs').value;
+        const cliente = document.getElementById('cliente').value;
+        const descricao = document.getElementById('descricao').value;
+        const periodo = document.getElementById('periodo').value;
+        const data = document.getElementById('data').value;
+        const obs = document.getElementById('obs').value;
+        const telefone = document.getElementById('telefone').value;
+        const endereco = document.getElementById('endereco').value;
+        const atendente = document.getElementById('atendente').value;
+        let script = idOs.trim() === "" ?
+            `-------------------------------------------
+${titulo}
+CLIENTE: ${cliente}
+DESCRIÇÃO: ${descricao}
+PERÍODO: ${periodo}
+DATA: ${data}
+OBS: ${obs}
+ENDEREÇO: ${endereco}
+ATENDENTE: ${atendente}
+TELEFONE: ${telefone}
+-------------------------------------------` :
+            `*${titulo}*
+ID OS: ${idOs}
+CLIENTE: ${cliente}
+DESCRIÇÃO: ${descricao}
+PERÍODO: ${periodo}
+DATA: ${data}
+OBS: ${obs}
+ENDEREÇO: ${endereco}
+ATENDENTE: ${atendente}
+TELEFONE: ${telefone}`;
+        
+        document.getElementById('output').textContent = script;
+        document.getElementById('copyButton').style.display = 'inline-block';
+    }
+    function copiarScript() {
+        const outputText = document.getElementById('output').textContent;
+        navigator.clipboard.writeText(outputText).then(() => {
+            // Exibe o alerta com estilo personalizado
+            const alerta = document.createElement("div");
+            alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
+            
+            const alertaInner = document.createElement("div");
+            alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #007bff; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
+            alertaInner.textContent = "Máscara copiada!";
+            
+            alerta.appendChild(alertaInner);
+            document.body.appendChild(alerta);
+            // Remove o alerta após 1 segundo
+            setTimeout(() => {
+                alerta.remove();
+            }, 1100);
+        }).catch(error => {
+            alert('Falha ao copiar: ' + error);
+        });
+    }
+    function limparDados() {
+        document.getElementById('titulo').value = '';
+        document.getElementById('idOs').value = '';
+        document.getElementById('cliente').value = '';
+        document.getElementById('descricao').value = '';
+        document.getElementById('periodo').value = '';
+        document.getElementById('data').value = '';
+        document.getElementById('obs').value = '';
+        document.getElementById('endereco').value = '';
+        document.getElementById('telefone').value = '';
+        document.getElementById('atendente').value = '';
+        document.getElementById('output').textContent = '';
+        document.getElementById('copyButton').style.display = 'none';
+    }
+</script>
+</body>
+</html>
