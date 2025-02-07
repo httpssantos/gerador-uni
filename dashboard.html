@@ -17,6 +17,24 @@
         margin: 0;
         box-sizing: border-box;
     }
+
+    .logout-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px; /* Posiciona no canto esquerdo */
+            background-color: #dc3545; /* Cor vermelha para destaque */
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c12a36; /* Tom de vermelho mais escuro */
+        }
+
     .container {
         width: 100%;
         max-width: 800px;
@@ -135,6 +153,7 @@
 <div class="container">
     <h1>Gerador de OS</h1>
     <button class="clear-btn" onclick="limparDados()">Limpar Dados</button>
+    <button class="logout-btn" onclick="logout()">Sair</button>
     <div class="form-row">
         <div class="form-group">
             <label for="titulo">Título</label>
@@ -230,6 +249,17 @@
             }
         });
     });
+
+    // Função de logout
+    window.logout = function() {  // Torna a função acessível globalmente
+        signOut(auth).then(() => {
+            console.log("Usuário deslogado");
+            window.location.href = '/index.html'; // Redireciona para a página de login
+        }).catch((error) => {
+            console.error("Erro ao sair:", error);
+            // Lide com erros, se necessário
+        });
+    }
 </script>
 <script>
     flatpickr("#data", {
