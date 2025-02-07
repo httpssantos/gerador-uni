@@ -202,6 +202,36 @@
     Todos os direitos reservados - 2025 - PP
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyD_PedNois7ob95dETaRnfpcOERWiTrPTE", // Substitua pelas suas configurações reais
+        authDomain: "login-1fae6.firebaseapp.com",
+        projectId: "login-1fae6",
+        storageBucket: "login-1fae6.firebasestorage.app",
+        messagingSenderId: "471575613590",
+        appId: "1:471575613590:web:cdbf384b8b8ac2bc3b32b7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Usuário está logado, pode exibir o dashboard
+                console.log("Usuário logado:", user);
+            } else {
+                // Usuário não está logado, redireciona para o login
+                console.log("Usuário não logado");
+                alert("Você precisa estar logado para acessar o dashboard.");
+                window.location.href = '/'; // Ou '/index.html'
+            }
+        });
+    });
+</script>
 <script>
     flatpickr("#data", {
         locale: "pt",
