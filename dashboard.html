@@ -222,43 +222,43 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-        // Configuração do Firebase *apenas* no frontend (sem as credenciais!)
-        const firebaseConfig = {
-            apiKey: import.meta.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-            authDomain: import.meta.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-            projectId: import.meta.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-            storageBucket: import.meta.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-            messagingSenderId: import.meta.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-            appId: import.meta.env.NEXT_PUBLIC_FIREBASE_APP_ID
-        };
+    // Configuração do Firebase *apenas* no frontend (sem as credenciais!)
+    const firebaseConfig = {
+        apiKey: import.meta.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+        authDomain: import.meta.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+        projectId: import.meta.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+        storageBucket: import.meta.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: import.meta.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+        appId: import.meta.env.NEXT_PUBLIC_FIREBASE_APP_ID
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
 
-        document.addEventListener('DOMContentLoaded', () => {
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    try {
-                        const response = await fetch('/api/user-data'); // Faz a requisição para a API
-                        if (!response.ok) {
-                            throw new Error("Erro ao obter dados do usuário");
-                        }
-                        const userData = await response.json();
-                        console.log("Dados do usuário:", userData);
-                        // Use userData.uid, userData.email, etc. no seu dashboard
-                    } catch (error) {
-                        console.error("Erro ao obter dados:", error);
-                        // Lide com o erro (exiba uma mensagem, etc.)
+    document.addEventListener('DOMContentLoaded', () => {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const response = await fetch('/api/user-data'); // Faz a requisição para a API
+                    if (!response.ok) {
+                        throw new Error("Erro ao obter dados do usuário");
                     }
-                } else {
-                    window.location.href = '/';
+                    const userData = await response.json();
+                    console.log("Dados do usuário:", userData);
+                    // Use userData.uid, userData.email, etc. no seu dashboard
+                } catch (error) {
+                    console.error("Erro ao obter dados:", error);
+                    // Lide com o erro (exiba uma mensagem, etc.)
                 }
-            });
+            } else {
+                window.location.href = '/';
+            }
         });
+    });
 
     // Função de logout
     window.logout = function() {  // Torna a função acessível globalmente
