@@ -225,37 +225,26 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-    // Configuração do Firebase *apenas* no frontend (sem as credenciais!)
     const firebaseConfig = {
-        apiKey: import.meta.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-        authDomain: import.meta.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-        projectId: import.meta.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-        storageBucket: import.meta.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: import.meta.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-        appId: import.meta.env.NEXT_PUBLIC_FIREBASE_APP_ID
+        apiKey: "AIzaSyD_PedNois7ob95dETaRnfpcOERWiTrPTE",
+        authDomain: "login-1fae6.firebaseapp.com",
+        projectId: "login-1fae6",
+        storageBucket: "login-1fae6.firebasestorage.app",
+        messagingSenderId: "471575613590",
+        appId: "1:471575613590:web:cdbf384b8b8ac2bc3b32b7"
     };
-
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-
     document.addEventListener('DOMContentLoaded', () => {
-        onAuthStateChanged(auth, async (user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
-                try {
-                    const response = await fetch('/api/user-data'); // Faz a requisição para a API
-                    if (!response.ok) {
-                        throw new Error("Erro ao obter dados do usuário");
-                    }
-                    const userData = await response.json();
-                    console.log("Dados do usuário:", userData);
-                    // Use userData.uid, userData.email, etc. no seu dashboard
-                } catch (error) {
-                    console.error("Erro ao obter dados:", error);
-                    // Lide com o erro (exiba uma mensagem, etc.)
-                }
+                // Usuário está logado, pode exibir o dashboard
+                console.log("Usuário logado:", user);
             } else {
-                window.location.href = '/';
+                // Usuário não está logado, redireciona para o login
+                console.log("Usuário não logado");
+                window.location.href = '/'; // Ou '/index.html'
             }
         });
     });
@@ -311,7 +300,7 @@ OBS: ${obs}
 ENDEREÇO: ${endereco}
 ATENDENTE: ${atendente}
 TELEFONE: ${telefone}`;
-        
+
         document.getElementById('output').textContent = script;
         document.getElementById('copyButton').style.display = 'inline-block';
     }
@@ -321,11 +310,11 @@ TELEFONE: ${telefone}`;
             // Exibe o alerta com estilo personalizado
             const alerta = document.createElement("div");
             alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
-            
+
             const alertaInner = document.createElement("div");
             alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #007bff; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
             alertaInner.textContent = "Máscara copiada!";
-            
+
             alerta.appendChild(alertaInner);
             document.body.appendChild(alerta);
             // Remove o alerta após 1 segundo
