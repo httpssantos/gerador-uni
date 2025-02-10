@@ -9,7 +9,7 @@ const firebaseConfig = {
     messagingSenderId: import.meta.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     appId: import.meta.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
-
+console.log(import.meta.env)
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
