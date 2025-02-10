@@ -66,8 +66,36 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_PedNois7ob95dETaRnfpcOERWiTrPTE",
+            authDomain: "login-1fae6.firebaseapp.com",
+            projectId: "login-1fae6",
+            storageBucket: "login-1fae6.firebasestorage.app",
+            messagingSenderId: "471575613590",
+            appId: "1:471575613590:web:cdbf384b8b8ac2bc3b32b7"
+        };
+    
+        // Inicializa Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+    
+        // Verifica se o usuário está logado
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Se não estiver logado, redireciona para a página de login
+                window.location.href = "/dashboard";
+            }
+        });
+    
+        // Adiciona a função de logout
+        function logout() {
+            signOut(auth).then(() => {
+                window.location.href = "/index.html";
+            }).catch((error) => {
+                console.error("Erro ao sair:", error);
     import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
     const firebaseConfig = {
         apiKey: "AIzaSyD_PedNois7ob95dETaRnfpcOERWiTrPTE",
         authDomain: "login-1fae6.firebaseapp.com",
@@ -79,29 +107,10 @@
     // Inicializa Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-
     // Função de login
     function login() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.user) {
-            window.location.href = "/dashboard";
-        } else {
-            document.getElementById("error-message").textContent = "E-mail ou senha incorretos.";
-        }
-    })
-    .catch(error => console.error("Erro ao logar:", error));
-}
-
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log("Usuário autenticado:", userCredential.user);
@@ -111,8 +120,11 @@
                 console.error("Erro ao logar:", error);
                 document.getElementById("error-message").textContent = "E-mail ou senha incorretos.";
             });
+        }
+    
+        window.logout = logout;
+    </script>
     }
-
     // Permitir que a função seja chamada pelo botão no HTML
     window.login = login;
 </script>
