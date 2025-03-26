@@ -1,21 +1,28 @@
-function autoPreencher() {
-    const cliente = document.getElementById('cliente').value;
-    if (cliente.trim() !== "") {
-        fetch("/api/openai", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ cliente })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.descricao) {
-                document.getElementById('descricao').value = data.descricao;
-            } else {
-                console.error("Erro ao preencher os campos:", data.error);
-            }
-        })
-        .catch(error => console.error("Erro ao conectar com API:", error));
+const { Configuration, OpenAIApi } = require("openai");
+
+module.exports = async (req, res) => {
+    if (req.method !== "POST") {
+        return res.status(405).json({ error: "Método não permitido" });
     }
-}
+
+    const { cliente } = req.body;
+    if (!cliente) {
+        return res.status(400).json({ error: "Cliente não informado" });
+    }
+
+    const configuration = new Configuration({
+        apiKey: process.env.OPENAI_API_KEY, // Defina no ambiente do Vercel
+    });
+    const openai = new OpenAIApi(configuration);
+
+    try {
+        const response = await openai.createCompletion({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: `Gere uma descrição para o cliente: ${cliente}` }],
+        });
+
+        return res.status(200).json({ descricao: response.data.choices[0].message.content });
+    } catch (error) {
+        return res.status(500).json({ error: "Erro ao conectar com OpenAI" });
+    }
+};
