@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,7 +10,7 @@
     <style>
     body {
         font-family: Arial, sans-serif;
-        background-image: radial-gradient( circle farthest-corner at 7.2% 13.6%,  rgba(37,249,245,1) 0%, rgba(8,70,218,1) 90% );
+        background-image: linear-gradient(to right top, #051937, #002364, #002b91, #002ebe, #0a28e9);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -57,7 +58,7 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        background-color: #1973da;
+        background-color: #002b91;
         color: white;
         padding: 5px 10px;
         border: none;
@@ -66,7 +67,7 @@
         font-size: 12px;
     }
     .clear-btn:hover {
-        background-color: #0e84e4;
+        background-color: #002b91;
     }
     .form-row {
         display: flex;
@@ -94,7 +95,7 @@
         box-sizing: border-box;
     }
     .generate-btn {
-        background-color: #0c7ae0;
+        background-color: #002b91;
         color: white;
         padding: 8px;
         border: none;
@@ -105,7 +106,7 @@
         margin-top: 10px;
     }
     .generate-btn:hover {
-        background-color: #3389eb;
+        background-color: #002b91;
     }
     .output {
         margin-top: 15px;
@@ -117,7 +118,7 @@
         font-size: 13px;
     }
     .copy-btn {
-        background-color: #007bff;
+        background-color: #002b91;
         color: white;
         padding: 8px;
         border: none;
@@ -128,7 +129,7 @@
         font-size: 13px;
     }
     .copy-btn:hover {
-        background-color: #0056b3;
+        background-color: #002b91;
     }
     /* Responsividade para telas menores */
     @media (max-width: 600px) {
@@ -275,7 +276,7 @@ TELEFONE: ${telefone}`;
             alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
 
             const alertaInner = document.createElement("div");
-            alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #007bff; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
+            alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #08D1A5; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
             alertaInner.textContent = "Máscara copiada!";
 
             alerta.appendChild(alertaInner);
