@@ -1,159 +1,304 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="imagex/jpeg" href="https://internetmais.net/wp-content/uploads/2018/05/Logo_internet_MAIS.png">
+    <link rel="shortcut icon" type="image/jpeg" href="https://internetmais.net/wp-content/uploads/2018/05/Logo_internet_MAIS.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>Gerador de OS</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-image: linear-gradient(to right top, #051937, #002364, #002b91, #002ebe, #0a28e9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        box-sizing: border-box;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            background-image: 
+                radial-gradient(at 20% 30%, rgba(56, 182, 255, 0.4) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, rgba(124, 58, 237, 0.3) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, rgba(139, 92, 246, 0.2) 0px, transparent 50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+            color: #e2e8f0;
+        }
 
-    .logout-btn {
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+            background-color: rgba(15, 23, 42, 0.9);
+            border-radius: 16px;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.2),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06),
+                inset 0 0 0 1px rgba(148, 163, 184, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin: 0;
+            background: linear-gradient(90deg, #38b6ff, #8a2be2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.025em;
+        }
+
+        .clear-btn, .logout-btn {
             position: absolute;
-            top: 15px;
-            left: 15px; /* Posiciona no canto esquerdo */
-            background-color: #dc3545; /* Cor vermelha para destaque */
-            color: white;
-            padding: 5px 10px;
+            top: 1rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .clear-btn {
+            right: 1rem;
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background-color: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-btn {
+            left: 1rem;
+            background-color: #7c3aed;
+            color: white;
         }
 
         .logout-btn:hover {
-            background-color: #c12a36; /* Tom de vermelho mais escuro */
+            background-color: #6d28d9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-    .container {
-        width: 100%;
-        max-width: 800px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        position: relative;
-    }
-    h1 {
-        text-align: center;
-        color: #333;
-        font-size: 20px;
-        margin: 0;
-    }
-    .clear-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background-color: #002b91;
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-    }
-    .clear-btn:hover {
-        background-color: #002b91;
-    }
-    .form-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .form-group {
-        flex: 1;
-        min-width: 150px;
-    }
-    label {
-        font-weight: 500;
-        color: #333;
-        font-size: 14px;
-        margin-bottom: 5px;
-        display: block;
-    }
-    input, select, textarea {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-    .generate-btn {
-        background-color: #002b91;
-        color: white;
-        padding: 8px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 15px;
-        width: 100%;
-        margin-top: 10px;
-    }
-    .generate-btn:hover {
-        background-color: #002b91;
-    }
-    .output {
-        margin-top: 15px;
-        padding: 10px;
-        background-color: #f1f1f1;
-        border-radius: 4px;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        font-size: 13px;
-    }
-    .copy-btn {
-        background-color: #002b91;
-        color: white;
-        padding: 8px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100%;
-        margin-top: 10px;
-        font-size: 13px;
-    }
-    .copy-btn:hover {
-        background-color: #002b91;
-    }
-    /* Responsividade para telas menores */
-    @media (max-width: 600px) {
         .form-row {
-            flex-direction: column;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
-    }
-    footer {
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background-color: rgba(2, 6, 23, 0.5);
+            color: #e2e8f0;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #38b6ff;
+            box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.3);
+        }
+
+        .generate-btn, .copy-btn {
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .generate-btn {
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            color: white;
+            margin-top: 0.5rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, #1e40af, #6d28d9);
+        }
+
+        .output {
+            margin-top: 1rem;
+            padding: 1.25rem;
+            background-color: rgba(2, 6, 23, 0.5);
+            border-radius: 8px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            font-size: 0.875rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            font-family: 'Courier New', monospace;
+            color: #86efac;
+            min-height: 120px;
+        }
+
+        .copy-btn {
+            background-color: #10b981;
+            color: white;
+            margin-top: 0.75rem;
+            display: none;
+        }
+
+        .copy-btn:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
             width: 100%;
             text-align: center;
-            padding: 3px;
-            background-color: #333;
-            color: white;
+            padding: 0.75rem;
+            background-color: rgba(15, 23, 42, 0.9);
+            color: #94a3b8;
             position: fixed;
             bottom: 0;
             left: 0;
-            font-size: 14px;
+            font-size: 0.875rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
         }
-</style>
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+        }
+
+        /* Animação de notificação */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 1rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease forwards, fadeOut 0.3s ease 0.7s forwards;
+        }
+
+        .notification-inner {
+            margin: 0 auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 0.75rem 1.5rem;
+            background-color: #10b981;
+            color: white;
+            text-align: center;
+            font-size: 0.875rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            min-width: 250px;
+        }
+
+        /* Tech elements */
+        .tech-border {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 16px;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .tech-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #38b6ff, transparent);
+            animation: borderGlow 3s linear infinite;
+        }
+
+        .tech-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #8a2be2, transparent);
+            animation: borderGlow 3s linear infinite 1.5s;
+        }
+
+        @keyframes borderGlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
+    <div class="tech-border"></div>
     <h1>Gerador de OS</h1>
     <button class="clear-btn" onclick="limparDados()">Limpar Dados</button>
+  
+    
     <div class="form-row">
         <div class="form-group">
             <label for="titulo">Título</label>
@@ -172,6 +317,7 @@
             <input type="text" id="cliente" required>
         </div>
     </div>
+    
     <div class="form-row">
         <div class="form-group">
             <label for="descricao">Descrição</label>
@@ -190,6 +336,7 @@
             <input type="date" id="data" required>
         </div>
     </div>
+    
     <div class="form-row">
         <div class="form-group">
             <label for="obs">Observação</label>
@@ -202,7 +349,7 @@
         <div class="form-group">
             <label for="telefone">Telefone</label>
             <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
-        </div>        
+        </div>
         <div class="form-group">
             <label for="atendente">Atendente</label>
             <select id="atendente">
@@ -214,24 +361,27 @@
             </select>
         </div>
     </div>
+    
     <button class="generate-btn" onclick="gerarScript()">Gerar Script</button>
     <div class="output" id="output"></div>
-    <button class="copy-btn" id="copyButton" onclick="copiarScript()" style="display:none;">Copiar Script</button>
+    <button class="copy-btn" id="copyButton" onclick="copiarScript()">Copiar Script</button>
 </div>
+
 <footer>
     Todos os direitos reservados - 2025 - PP
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
-</script>
 <script>
     flatpickr("#data", {
         locale: "pt",
-        dateFormat: "d/m",
+        dateFormat: "d/m/Y",
         altInput: true,
-        altFormat: "d/m",
+        altFormat: "d/m/Y",
     });
+    
     function gerarScript() {
         const titulo = document.getElementById('titulo').value;
         const idOs = document.getElementById('idOs').value;
@@ -243,69 +393,56 @@
         const telefone = document.getElementById('telefone').value;
         const endereco = document.getElementById('endereco').value;
         const atendente = document.getElementById('atendente').value;
-        let script = idOs.trim() === "" ?
-            `-------------------------------------------
-${titulo}
-CLIENTE: ${cliente}
-DESCRIÇÃO: ${descricao}
-PERÍODO: ${periodo}
-DATA: ${data}
-OBS: ${obs}
-ENDEREÇO: ${endereco}
-ATENDENTE: ${atendente}
-TELEFONE: ${telefone}
--------------------------------------------` :
-            `*${titulo}*
-ID OS: ${idOs}
-CLIENTE: ${cliente}
-DESCRIÇÃO: ${descricao}
-PERÍODO: ${periodo}
-DATA: ${data}
-OBS: ${obs}
-ENDEREÇO: ${endereco}
-ATENDENTE: ${atendente}
-TELEFONE: ${telefone}`;
+        
+        let script = idOs.trim() === "" ? 
+            `-------------------------------------------\n${titulo}\nCLIENTE: ${cliente}\nDESCRIÇÃO: ${descricao}\nPERÍODO: ${periodo}\nDATA: ${data}\nOBS: ${obs}\nENDEREÇO: ${endereco}\nATENDENTE: ${atendente}\nTELEFONE: ${telefone}\n-------------------------------------------` : 
+            `*${titulo}*\nID OS: ${idOs}\nCLIENTE: ${cliente}\nDESCRIÇÃO: ${descricao}\nPERÍODO: ${periodo}\nDATA: ${data}\nOBS: ${obs}\nENDEREÇO: ${endereco}\nATENDENTE: ${atendente}\nTELEFONE: ${telefone}`;
 
         document.getElementById('output').textContent = script;
-        document.getElementById('copyButton').style.display = 'inline-block';
+        document.getElementById('copyButton').style.display = 'block';
     }
+    
     function copiarScript() {
         const outputText = document.getElementById('output').textContent;
         navigator.clipboard.writeText(outputText).then(() => {
-            // Exibe o alerta com estilo personalizado
-            const alerta = document.createElement("div");
-            alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
-
-            const alertaInner = document.createElement("div");
-            alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #08D1A5; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
-            alertaInner.textContent = "Máscara copiada!";
-
-            alerta.appendChild(alertaInner);
-            document.body.appendChild(alerta);
-            // Remove o alerta após 1 segundo
+            const notification = document.createElement("div");
+            notification.className = "notification";
+            
+            const notificationInner = document.createElement("div");
+            notificationInner.className = "notification-inner";
+            notificationInner.textContent = "Script copiado com sucesso!";
+            
+            notification.appendChild(notificationInner);
+            document.body.appendChild(notification);
+            
             setTimeout(() => {
-                alerta.remove();
-            }, 1100);
+                notification.remove();
+            }, 1000);
         }).catch(error => {
             alert('Falha ao copiar: ' + error);
         });
     }
+    
     function limparDados() {
-        document.getElementById('titulo').value = '';
+        document.getElementById('titulo').value = 'Atenuação';
         document.getElementById('idOs').value = '';
         document.getElementById('cliente').value = '';
         document.getElementById('descricao').value = '';
-        document.getElementById('periodo').value = '';
+        document.getElementById('periodo').value = 'Manhã';
         document.getElementById('data').value = '';
         document.getElementById('obs').value = '';
         document.getElementById('endereco').value = '';
         document.getElementById('telefone').value = '';
-        document.getElementById('atendente').value = '';
+        document.getElementById('atendente').value = 'Pedro';
         document.getElementById('output').textContent = '';
         document.getElementById('copyButton').style.display = 'none';
     }
-
-
+    
+    function logout() {
+        if (confirm('Deseja realmente sair?')) {
+            alert('Você foi desconectado.');
+        }
+    }
 </script>
 </body>
 </html>
