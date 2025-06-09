@@ -13,7 +13,6 @@ async function logIP() {
     const { ip } = await response.json();
     console.log("IP capturado:", ip);
     
-    // Envie para seu backend (exemplo com Google Analytics):
     gtag('event', 'ip_capture', { ip_address: ip });
     
   } catch (error) {
