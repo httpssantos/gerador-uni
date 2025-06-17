@@ -1,365 +1,372 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GERADOR DE O.S</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Orbitron', sans-serif;
-            overflow: hidden;
-            background-color: #000;
-        }
-        
-        .binary-code {
-            position: absolute;
-            color: rgba(0, 255, 0, 0.7);
-            font-size: 14px;
-            white-space: nowrap;
-            animation: fall linear infinite;
-            user-select: none;
-        }
-        
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-        
-        .glitch {
-            position: relative;
-        }
-        
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .glitch::before {
-            color: #0ff;
-            z-index: -1;
-            animation: glitch-effect 3s infinite;
-        }
-        
-        .glitch::after {
-            color: #f0f;
-            z-index: -2;
-            animation: glitch-effect 2s infinite reverse;
-        }
-        
-        @keyframes glitch-effect {
-            0% {
-                transform: translate(0);
-            }
-            20% {
-                transform: translate(-3px, 3px);
-            }
-            40% {
-                transform: translate(-3px, -3px);
-            }
-            60% {
-                transform: translate(3px, 3px);
-            }
-            80% {
-                transform: translate(3px, -3px);
-            }
-            100% {
-                transform: translate(0);
-            }
-        }
-        
-        .hacker-terminal {
-            background-color: rgba(0, 20, 0, 0.7);
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .terminal-cursor {
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
-        
-        .scan-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                rgba(0, 255, 0, 0.3) 50%, 
-                transparent 100%);
-            animation: scan 8s linear infinite;
-            z-index: 10;
-        }
-        
-        @keyframes scan {
-            0% {
-                top: 0%;
-            }
-            100% {
-                top: 100%;
-            }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
-            }
-        }
-    </style>
-</head>
-<body class="relative h-screen w-full bg-black text-green-500">
-    <!-- Binary rain background -->
-    <div id="binaryRain"></div>
-    
-    <!-- Scan line effect -->
-    <div class="scan-line"></div>
-    
-    <!-- Main content -->
-    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 z-20">
-        <!-- Warning alert -->
-        <div class="w-full max-w-2xl mb-8 p-4 hacker-terminal pulse">
-            <div class="flex items-center">
-                <i class="fas fa-exclamation-triangle text-red-500 mr-3 text-xl"></i>
-                <h2 class="glitch text-xl font-bold" data-text="WARNING: CYBER ATTACK DETECTED">WARNING: CYBER ATTACK DETECTED</h2>
-            </div>
-            <div class="mt-2 text-sm">
-                <p>> Unauthorized access attempt detected</p>
-                <p>> Firewall breach in progress</p>
-                <p>> Data exfiltration detected</p>
-            </div>
-        </div>
-        
-        <!-- Hacker terminal -->
-        <div class="w-full max-w-4xl hacker-terminal p-4">
-            <div class="flex items-center mb-2">
-                <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
-                <span class="ml-2 text-sm">root@hacker:~</span>
-            </div>
-            <div id="terminalOutput" class="h-64 overflow-y-auto text-sm mb-2">
-                <p>> Initializing attack sequence...</p>
-                <p>> Bypassing security protocols...</p>
-                <p>> Exploiting vulnerability CVE-2023-1234...</p>
-                <p>> Establishing backdoor connection...</p>
-                <p>> Deploying ransomware payload...</p>
-            </div>
-            <div class="flex items-center">
-                <span class="mr-2">></span>
-                <span id="typingText" class="flex-1"></span>
-                <span class="terminal-cursor">|</span>
-            </div>
-        </div>
-        
-        <!-- Counter measures -->
-        <div class="w-full max-w-2xl mt-8 p-4 hacker-terminal">
-            <div class="flex items-center mb-2">
-                <i class="fas fa-shield-alt text-blue-400 mr-2"></i>
-                <h3 class="text-lg">DEFENSE SYSTEMS ACTIVATED</h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div>
-                    <p>> Intrusion detection: <span class="text-yellow-400">ACTIVE</span></p>
-                    <p>> Traffic monitoring: <span class="text-green-400">ONLINE</span></p>
-                </div>
-                <div>
-                    <p>> Threat analysis: <span class="text-blue-400">SCANNING</span></p>
-                    <p>> Countermeasures: <span class="text-red-400">ENGAGED</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Connection lines animation -->
-    <div class="absolute inset-0 z-10">
-        <svg width="100%" height="100%" class="opacity-20">
-            <defs>
-                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0, 255, 0, 0.3)" stroke-width="0.5"/>
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)"></rect>
-            
-            <!-- Animated connection lines -->
-            <line x1="10%" y1="20%" x2="30%" y2="40%" stroke="rgba(0, 255, 0, 0.5)" stroke-width="1">
-                <animate attributeName="x2" values="30%; 32%; 30%; 28%; 30%" dur="5s" repeatCount="indefinite" />
-                <animate attributeName="y2" values="40%; 42%; 40%; 38%; 40%" dur="3s" repeatCount="indefinite" />
-            </line>
-            <line x1="70%" y1="30%" x2="50%" y2="60%" stroke="rgba(0, 255, 0, 0.5)" stroke-width="1">
-                <animate attributeName="x2" values="50%; 52%; 50%; 48%; 50%" dur="4s" repeatCount="indefinite" />
-                <animate attributeName="y2" values="60%; 62%; 60%; 58%; 60%" dur="6s" repeatCount="indefinite" />
-            </line>
-            <line x1="20%" y1="70%" x2="40%" y2="50%" stroke="rgba(0, 255, 0, 0.5)" stroke-width="1">
-                <animate attributeName="x2" values="40%; 42%; 40%; 38%; 40%" dur="7s" repeatCount="indefinite" />
-                <animate attributeName="y2" values="50%; 52%; 50%; 48%; 50%" dur="5s" repeatCount="indefinite" />
-            </line>
-        </svg>
-    </div>
-    
+    <link rel="shortcut icon" type="imagex/jpeg" href="https://internetmais.net/wp-content/uploads/2018/05/Logo_internet_MAIS.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Gerador de OS</title>
     <script>
-        // Binary rain effect
-        function createBinaryRain() {
-            const container = document.getElementById('binaryRain');
-            const chars = '01';
-            const columns = Math.floor(window.innerWidth / 15);
-            
-            for (let i = 0; i < columns; i++) {
-                const element = document.createElement('div');
-                element.className = 'binary-code';
-                element.style.left = `${(i * 15)}px`;
-                element.style.animationDuration = `${5 + Math.random() * 10}s`;
-                element.style.animationDelay = `${Math.random() * 5}s`;
-                
-                let content = '';
-                const length = 20 + Math.floor(Math.random() * 30);
-                for (let j = 0; j < length; j++) {
-                    content += chars[Math.floor(Math.random() * chars.length)];
-                }
-                
-                element.textContent = content;
-                container.appendChild(element);
-                
-                // Make it continuous
-                setInterval(() => {
-                    let newContent = '';
-                    const length = 20 + Math.floor(Math.random() * 30);
-                    for (let j = 0; j < length; j++) {
-                        newContent += chars[Math.floor(Math.random() * chars.length)];
-                    }
-                    element.textContent = newContent;
-                    element.style.top = `-${length * 15}px`;
-                }, (5 + Math.random() * 10) * 1000);
-            }
-        }
-        
-        // Terminal typing effect
-        function typeTerminalText() {
-            const texts = [
-                "sudo rm -rf /* --no-preserve-root",
-                "hydra -l admin -P passlist.txt ssh://target.com",
-                "msfconsole -q -x 'use exploit/multi/handler; set payload windows/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit'",
-                "nmap -sS -A -T4 target.com",
-                "sqlmap -u 'http://target.com/page.php?id=1' --dbs",
-                "john --wordlist=rockyou.txt hashes.txt"
-            ];
-            
-            const element = document.getElementById('typingText');
-            let currentText = '';
-            let currentIndex = 0;
-            let textIndex = 0;
-            let isDeleting = false;
-            
-            function type() {
-                const fullText = texts[textIndex];
-                
-                if (isDeleting) {
-                    currentText = fullText.substring(0, currentIndex - 1);
-                    currentIndex--;
-                } else {
-                    currentText = fullText.substring(0, currentIndex + 1);
-                    currentIndex++;
-                }
-                
-                element.textContent = currentText;
-                
-                let typeSpeed = 100;
-                
-                if (isDeleting) {
-                    typeSpeed /= 2;
-                }
-                
-                if (!isDeleting && currentText === fullText) {
-                    typeSpeed = 2000;
-                    isDeleting = true;
-                } else if (isDeleting && currentText === '') {
-                    isDeleting = false;
-                    textIndex = (textIndex + 1) % texts.length;
-                    typeSpeed = 500;
-                }
-                
-                setTimeout(type, typeSpeed);
-            }
-            
-            type();
-        }
-        
-        // Add random terminal output
-        function addTerminalOutput() {
-            const outputs = [
-                "> Scanning ports... Found 3 open ports",
-                "> Brute force attempt successful. Credentials obtained",
-                "> Privilege escalation in progress...",
-                "> Root access achieved",
-                "> Downloading sensitive data...",
-                "> Covering tracks...",
-                "> Establishing persistent connection...",
-                "> Deploying secondary payload..."
-            ];
-            
-            const terminal = document.getElementById('terminalOutput');
-            
-            setInterval(() => {
-                const randomOutput = outputs[Math.floor(Math.random() * outputs.length)];
-                const element = document.createElement('p');
-                element.textContent = randomOutput;
-                terminal.appendChild(element);
-                terminal.scrollTop = terminal.scrollHeight;
-                
-                // Randomly add error sometimes
-                if (Math.random() > 0.7) {
-                    setTimeout(() => {
-                        const errorElement = document.createElement('p');
-                        errorElement.textContent = "> ERROR: Connection lost. Reconnecting...";
-                        errorElement.className = "text-red-400";
-                        terminal.appendChild(errorElement);
-                        terminal.scrollTop = terminal.scrollHeight;
-                    }, 1000);
-                }
-            }, 3000);
-        }
-        
-        // Initialize all effects
-        window.onload = function() {
-            createBinaryRain();
-            typeTerminalText();
-            addTerminalOutput();
-            
-            // Make responsive
-            window.addEventListener('resize', () => {
-                document.getElementById('binaryRain').innerHTML = '';
-                createBinaryRain();
-            });
-        };
+async function logIP() {
+  try {
+    const response = await fetch('/api/ip');
+    const { ip } = await response.json();
+    console.log("IP capturado:", ip);
+    
+    gtag('event', 'ip_capture', { ip_address: ip });
+    
+  } catch (error) {
+    console.error("Erro ao capturar IP:", error);
+  }
+}
+logIP();
+</script>
+
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+	
+    
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: linear-gradient(to right top, #051937, #002364, #002b91, #002ebe, #0a28e9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .logout-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px; /* Posiciona no canto esquerdo */
+            background-color: #dc3545; /* Cor vermelha para destaque */
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c12a36; /* Tom de vermelho mais escuro */
+        }
+
+    .container {
+        width: 100%;
+        max-width: 800px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+        font-size: 20px;
+        margin: 0;
+    }
+    .clear-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: #002b91;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .clear-btn:hover {
+        background-color: #002b91;
+    }
+    .form-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .form-group {
+        flex: 1;
+        min-width: 150px;
+    }
+    label {
+        font-weight: 500;
+        color: #333;
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    .generate-btn {
+        background-color: #002b91;
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 15px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .generate-btn:hover {
+        background-color: #002b91;
+    }
+    .output {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-radius: 4px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        font-size: 13px;
+    }
+    .copy-btn {
+        background-color: #002b91;
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 13px;
+    }
+    .copy-btn:hover {
+        background-color: #002b91;
+    }
+    /* Responsividade para telas menores */
+    @media (max-width: 600px) {
+        .form-row {
+            flex-direction: column;
+        }
+    }
+    footer {
+            width: 100%;
+            text-align: center;
+            padding: 3px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-size: 14px;
+        }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Gerador de OS</h1>
+    <button class="clear-btn" onclick="limparDados()">Limpar Dados</button>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <select id="titulo">
+                <option value="Atenuação">Atenuação</option>
+                <option value="Rompimento">Rompimento</option>
+                <option value="Visita técnica">Visita técnica</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="idOs">ID OS</label>
+            <input type="text" id="idOs" required>
+        </div>
+        <div class="form-group">
+            <label for="cliente">Cliente</label>
+            <input type="text" id="cliente" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <input type="text" id="descricao" required>
+        </div>
+        <div class="form-group">
+            <label for="periodo">Período</label>
+            <select id="periodo">
+                <option value="Manhã">Manhã</option>
+                <option value="Tarde">Tarde</option>
+                <option value="Qualquer">Qualquer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" id="data" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="obs">Observação</label>
+            <input type="text" id="obs" required>
+        </div>
+        <div class="form-group">
+            <label for="endereco">Endereço</label>
+            <input type="text" id="endereco" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
+        </div>        
+        <div class="form-group">
+            <label for="atendente">Atendente</label>
+            <select id="atendente">
+                <option value="Pedro">Pedro</option>
+                <option value="Matheus">Matheus</option>
+                <option value="Ricardo">Ricardo</option>
+                <option value="Vinicius">Vinicius</option>
+                <option value="Paulo">Paulo</option>
+		<option value="Alessandro">Alessandro</option>
+            </select>
+        </div>
+    </div>
+    <button class="generate-btn" onclick="gerarScript()">Gerar Script</button>
+    <div class="output" id="output"></div>
+    <button class="copy-btn" id="copyButton" onclick="copiarScript()" style="display:none;">Copiar Script</button>
+</div>
+<footer>
+    Todos os direitos reservados - 2025 - PP
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+</script>
+<script>
+    flatpickr("#data", {
+        locale: "pt",
+        dateFormat: "d/m",
+        altInput: true,
+        altFormat: "d/m",
+    });
+    function gerarScript() {
+        const titulo = document.getElementById('titulo').value;
+        const idOs = document.getElementById('idOs').value;
+        const cliente = document.getElementById('cliente').value;
+        const descricao = document.getElementById('descricao').value;
+        const periodo = document.getElementById('periodo').value;
+        const data = document.getElementById('data').value;
+        const obs = document.getElementById('obs').value;
+        const telefone = document.getElementById('telefone').value;
+        const endereco = document.getElementById('endereco').value;
+        const atendente = document.getElementById('atendente').value;
+        let script = idOs.trim() === "" ?
+            `-------------------------------------------
+${titulo}
+CLIENTE: ${cliente}
+DESCRIÇÃO: ${descricao}
+PERÍODO: ${periodo}
+DATA: ${data}
+OBS: ${obs}
+ENDEREÇO: ${endereco}
+ATENDENTE: ${atendente}
+TELEFONE: ${telefone}
+-------------------------------------------` :
+            `*${titulo}*
+ID OS: ${idOs}
+CLIENTE: ${cliente}
+DESCRIÇÃO: ${descricao}
+PERÍODO: ${periodo}
+DATA: ${data}
+OBS: ${obs}
+ENDEREÇO: ${endereco}
+ATENDENTE: ${atendente}
+TELEFONE: ${telefone}`;
+
+        document.getElementById('output').textContent = script;
+        document.getElementById('copyButton').style.display = 'inline-block';
+    }
+    function copiarScript() {
+        const outputText = document.getElementById('output').textContent;
+        navigator.clipboard.writeText(outputText).then(() => {
+            // Exibe o alerta com estilo personalizado
+            const alerta = document.createElement("div");
+            alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
+
+            const alertaInner = document.createElement("div");
+            alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #08D1A5; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
+            alertaInner.textContent = "Máscara copiada!";
+
+            alerta.appendChild(alertaInner);
+            document.body.appendChild(alerta);
+            // Remove o alerta após 1 segundo
+            setTimeout(() => {
+                alerta.remove();
+            }, 1100);
+        }).catch(error => {
+            alert('Falha ao copiar: ' + error);
+        });
+    }
+    function limparDados() {
+        document.getElementById('titulo').value = '';
+        document.getElementById('idOs').value = '';
+        document.getElementById('cliente').value = '';
+        document.getElementById('descricao').value = '';
+        document.getElementById('periodo').value = '';
+        document.getElementById('data').value = '';
+        document.getElementById('obs').value = '';
+        document.getElementById('endereco').value = '';
+        document.getElementById('telefone').value = '';
+        document.getElementById('atendente').value = '';
+        document.getElementById('output').textContent = '';
+        document.getElementById('copyButton').style.display = 'none';
+    }
+
+
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 </html>
