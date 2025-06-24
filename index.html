@@ -29,7 +29,9 @@ logIP();
   const supabase = supabase.createClient("https://efxjlmxejvjqrqkdljlk.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmeGpsbXhlanZqcXJxa2RsamxrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3OTQyMzYsImV4cCI6MjA2NjM3MDIzNn0.JsdShgUPR0EXTIRjdQ0PZ35aB71Wg7CoqOIPfaRFitw");
 
   async function salvarOS(dados) {
-    const { error } = await supabase.from("ordens_servico").insert(dados);
+    const { error } = await supabase
+    .from("ordens_servico")
+    .inset([dados]);
     if (error) alert("Erro ao salvar OS");
   }
 </script>
@@ -322,6 +324,8 @@ TELEFONE: ${telefone}`;
 
         salvarOS(dados);
     }
+
+    
     function copiarScript() {
         const outputText = document.getElementById('output').textContent;
         navigator.clipboard.writeText(outputText).then(() => {
