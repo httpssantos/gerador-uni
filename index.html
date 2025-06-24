@@ -23,23 +23,14 @@ async function logIP() {
 logIP();
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-    async function salvarOS(dados) {
-  const resposta = await fetch('/api/salvar-os', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados),
-  });
+  const supabase = supabase.createClient("https://efxjlmxejvjqrqkdljlk.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmeGpsbXhlanZqcXJxa2RsamxrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3OTQyMzYsImV4cCI6MjA2NjM3MDIzNn0.JsdShgUPR0EXTIRjdQ0PZ35aB71Wg7CoqOIPfaRFitw");
 
-  const resultado = await resposta.json();
-  if (!resposta.ok) {
-    alert("Erro ao salvar OS: " + resultado?.detalhe || "Desconhecido");
-  } else {
-    console.log("OS salva com sucesso!");
+  async function salvarOS(dados) {
+    const { error } = await supabase.from("ordens_servico").insert(dados);
+    if (error) alert("Erro ao salvar OS");
   }
-}
-
 </script>
 
 
