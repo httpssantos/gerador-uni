@@ -1,406 +1,48 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="imagex/jpeg" href="https://internetmais.net/wp-content/uploads/2018/05/Logo_internet_MAIS.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <title>Gerador de OS</title>
-    <script>
-async function logIP() {
-  try {
-    const response = await fetch('/api/ip');
-    const { ip } = await response.json();
-    console.log("IP capturado:", ip);
-    
-    gtag('event', 'ip_capture', { ip_address: ip });
-    
-  } catch (error) {
-    console.error("Erro ao capturar IP:", error);
-  }
-}
-logIP();
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-  const supabase = supabase.createClient("https://efxjlmxejvjqrqkdljlk.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmeGpsbXhlanZqcXJxa2RsamxrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3OTQyMzYsImV4cCI6MjA2NjM3MDIzNn0.JsdShgUPR0EXTIRjdQ0PZ35aB71Wg7CoqOIPfaRFitw");
-
-  async function salvarOS(dados) {
-    const { error } = await supabase
-    .from("ordens_servico")
-    .inset([dados]);
-    if (error) alert("Erro ao salvar OS");
-  }
-</script>
-
-
-
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-	
-    
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-image: linear-gradient(to right top, #051937, #002364, #002b91, #002ebe, #0a28e9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        box-sizing: border-box;
-    }
-
-    .logout-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px; /* Posiciona no canto esquerdo */
-            background-color: #dc3545; /* Cor vermelha para destaque */
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .logout-btn:hover {
-            background-color: #c12a36; /* Tom de vermelho mais escuro */
-        }
-
-    .container {
-        width: 100%;
-        max-width: 800px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        position: relative;
-    }
-    h1 {
-        text-align: center;
-        color: #333;
-        font-size: 20px;
-        margin: 0;
-    }
-    .clear-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background-color: #002b91;
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-    }
-    .clear-btn:hover {
-        background-color: #002b91;
-    }
-    .form-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .form-group {
-        flex: 1;
-        min-width: 150px;
-    }
-    label {
-        font-weight: 500;
-        color: #333;
-        font-size: 14px;
-        margin-bottom: 5px;
-        display: block;
-    }
-    input, select, textarea {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-    .generate-btn {
-        background-color: #002b91;
-        color: white;
-        padding: 8px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 15px;
-        width: 100%;
-        margin-top: 10px;
-    }
-    .generate-btn:hover {
-        background-color: #002b91;
-    }
-    .output {
-        margin-top: 15px;
-        padding: 10px;
-        background-color: #f1f1f1;
-        border-radius: 4px;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        font-size: 13px;
-    }
-    .copy-btn {
-        background-color: #002b91;
-        color: white;
-        padding: 8px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100%;
-        margin-top: 10px;
-        font-size: 13px;
-    }
-    .copy-btn:hover {
-        background-color: #002b91;
-    }
-    /* Responsividade para telas menores */
-    @media (max-width: 600px) {
-        .form-row {
-            flex-direction: column;
-        }
-    }
-    footer {
-            width: 100%;
-            text-align: center;
-            padding: 3px;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            font-size: 14px;
-        }
-</style>
+  <meta charset="UTF-8">
+  <title>Teste Supabase</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
-<div class="container">
-    <h1>Gerador de OS</h1>
-    <button class="clear-btn" onclick="limparDados()">Limpar Dados</button>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="titulo">Título</label>
-            <select id="titulo">
-                <option value="Atenuação">Atenuação</option>
-                <option value="Rompimento">Rompimento</option>
-                <option value="Visita técnica">Visita técnica</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="idOs">ID OS</label>
-            <input type="text" id="idOs" required>
-        </div>
-        <div class="form-group">
-            <label for="cliente">Cliente</label>
-            <input type="text" id="cliente" required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="descricao">Descrição</label>
-            <input type="text" id="descricao" required>
-        </div>
-        <div class="form-group">
-            <label for="periodo">Período</label>
-            <select id="periodo">
-                <option value="Manhã">Manhã</option>
-                <option value="Tarde">Tarde</option>
-                <option value="Qualquer">Qualquer</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="data">Data</label>
-            <input type="date" id="data" required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="obs">Observação</label>
-            <input type="text" id="obs" required>
-        </div>
-        <div class="form-group">
-            <label for="endereco">Endereço</label>
-            <input type="text" id="endereco" required>
-        </div>
-        <div class="form-group">
-            <label for="telefone">Telefone</label>
-            <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
-        </div>        
-        <div class="form-group">
-            <label for="atendente">Atendente</label>
-            <select id="atendente">
-                <option value="Pedro">Pedro</option>
-                <option value="Matheus">Matheus</option>
-                <option value="Ricardo">Ricardo</option>
-                <option value="Vinicius">Vinicius</option>
-                <option value="Paulo">Paulo</option>
-		<option value="Alessandro">Alessandro</option>
-            </select>
-        </div>
-    </div>
-    <button class="generate-btn" onclick="gerarScript()">Gerar Script</button>
-    <div class="output" id="output"></div>
-    <button class="copy-btn" id="copyButton" onclick="copiarScript()" style="display:none;">Copiar Script</button>
-</div>
-<footer>
-    Todos os direitos reservados - 2025 - PP
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+  <h1>Envio para Supabase</h1>
+  <button onclick="enviar()">Enviar Dados</button>
 
-</script>
-<script>
-    flatpickr("#data", {
-        locale: "pt",
-        dateFormat: "d/m",
-        altInput: true,
-        altFormat: "d/m",
-    });
-    function gerarScript() {
-        const titulo = document.getElementById('titulo').value;
-        const idOs = document.getElementById('idOs').value;
-        const cliente = document.getElementById('cliente').value;
-        const descricao = document.getElementById('descricao').value;
-        const periodo = document.getElementById('periodo').value;
-        const data = document.getElementById('data').value;
-        const obs = document.getElementById('obs').value;
-        const telefone = document.getElementById('telefone').value;
-        const endereco = document.getElementById('endereco').value;
-        const atendente = document.getElementById('atendente').value;
-        let script = idOs.trim() === "" ?
-            `-------------------------------------------
-${titulo}
-CLIENTE: ${cliente}
-DESCRIÇÃO: ${descricao}
-PERÍODO: ${periodo}
-DATA: ${data}
-OBS: ${obs}
-ENDEREÇO: ${endereco}
-ATENDENTE: ${atendente}
-TELEFONE: ${telefone}
--------------------------------------------` :
-            `*${titulo}*
-ID OS: ${idOs}
-CLIENTE: ${cliente}
-DESCRIÇÃO: ${descricao}
-PERÍODO: ${periodo}
-DATA: ${data}
-OBS: ${obs}
-ENDEREÇO: ${endereco}
-ATENDENTE: ${atendente}
-TELEFONE: ${telefone}`;
+  <script>
+    // 1. Conectando ao Supabase
+    const supabaseUrl = "https://efxjlmxejvjqrqkdljlk.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmeGpsbXhlanZqcXJxa2RsamxrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3OTQyMzYsImV4cCI6MjA2NjM3MDIzNn0.JsdShgUPR0EXTIRjdQ0PZ35aB71Wg7CoqOIPfaRFitw";
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        document.getElementById('output').textContent = script;
-        document.getElementById('copyButton').style.display = 'inline-block';
+    // 2. Função de envio
+    async function enviar() {
+      const dados = {
+        titulo: "Teste Simples",
+        id_os: "123",
+        cliente: "João",
+        descricao: "Teste de envio direto",
+        periodo: "Tarde",
+        data: "2025-06-24",
+        obs: "Teste direto do navegador",
+        endereco: "Rua Teste, 123",
+        telefone: "(67) 99999-0000",
+        atendente: "Pedro",
+        criado_em: new Date().toISOString()
+      };
 
-        // ✅ ENVIO PARA O SUPABASE
-        const dados = {
-            titulo,
-            id_os: idOs,
-            cliente,
-            descricao,
-            periodo,
-            data,
-            obs,
-            endereco,
-            telefone,
-            atendente,
-            criado_em: new Date().toISOString()
-        };
+      const { data, error } = await supabase
+        .from("ordens_servico")
+        .insert(dados);
 
-        salvarOS(dados);
+      if (error) {
+        alert("Erro: " + error.message);
+        console.error(error);
+      } else {
+        alert("Dados enviados com sucesso!");
+        console.log(data);
+      }
     }
-
-    
-    function copiarScript() {
-        const outputText = document.getElementById('output').textContent;
-        navigator.clipboard.writeText(outputText).then(() => {
-            // Exibe o alerta com estilo personalizado
-            const alerta = document.createElement("div");
-            alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
-
-            const alertaInner = document.createElement("div");
-            alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #08D1A5; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
-            alertaInner.textContent = "Máscara copiada!";
-
-            alerta.appendChild(alertaInner);
-            document.body.appendChild(alerta);
-            // Remove o alerta após 1 segundo
-            setTimeout(() => {
-                alerta.remove();
-            }, 1100);
-        }).catch(error => {
-            alert('Falha ao copiar: ' + error);
-        });
-    }
-    function limparDados() {
-        document.getElementById('titulo').value = '';
-        document.getElementById('idOs').value = '';
-        document.getElementById('cliente').value = '';
-        document.getElementById('descricao').value = '';
-        document.getElementById('periodo').value = '';
-        document.getElementById('data').value = '';
-        document.getElementById('obs').value = '';
-        document.getElementById('endereco').value = '';
-        document.getElementById('telefone').value = '';
-        document.getElementById('atendente').value = '';
-        document.getElementById('output').textContent = '';
-        document.getElementById('copyButton').style.display = 'none';
-    }
-
-
-</script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
+  </script>
 </body>
 </html>
