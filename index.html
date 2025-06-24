@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,6 +22,26 @@ async function logIP() {
 }
 logIP();
 </script>
+
+
+<script>
+    async function salvarOS(dados) {
+  const resposta = await fetch('/api/salvar-os', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados),
+  });
+
+  const resultado = await resposta.json();
+  if (!resposta.ok) {
+    alert("Erro ao salvar OS: " + resultado?.detalhe || "Desconhecido");
+  } else {
+    console.log("OS salva com sucesso!");
+  }
+}
+
+</script>
+
 
 
     <script>
