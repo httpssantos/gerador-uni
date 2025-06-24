@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -303,6 +304,23 @@ TELEFONE: ${telefone}`;
 
         document.getElementById('output').textContent = script;
         document.getElementById('copyButton').style.display = 'inline-block';
+
+        // ✅ ENVIO PARA O SUPABASE
+        const dados = {
+            titulo,
+            id_os: idOs,
+            cliente,
+            descricao,
+            periodo,
+            data,
+            obs,
+            endereco,
+            telefone,
+            atendente,
+            criado_em: new Date().toISOString()
+        };
+
+        salvarOS(dados);
     }
     function copiarScript() {
         const outputText = document.getElementById('output').textContent;
