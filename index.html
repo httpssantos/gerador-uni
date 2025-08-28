@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,12 +8,42 @@
     <link rel="shortcut icon" type="imagex/jpeg" href="https://internetmais.net/wp-content/uploads/2018/05/Logo_internet_MAIS.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>Gerador de OS</title>
-    <script>async function logIP() {  try {    const response = await fetch('/api/ip');    const { ip } = await response.json();    console.log("IP capturado:", ip);        gtag('event', 'ip_capture', { ip_address: ip });      } catch (error) {    console.error("Erro ao capturar IP:", error);  }}logIP();</script>
+    <script>
+async function logIP() {
+  try {
+    const response = await fetch('/api/ip');
+    const { ip } = await response.json();
+    console.log("IP capturado:", ip);
+    
+    gtag('event', 'ip_capture', { ip_address: ip });
+    
+  } catch (error) {
+    console.error("Erro ao capturar IP:", error);
+  }
+}
+logIP();
+</script>
 
 
-    <script>        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };    </script>    <script defer src="/_vercel/insights/script.js"></script>	        <style>    body {        font-family: Arial, sans-serif;        background-image: linear-gradient(to right top, #051937, #002364, #002b91, #002ebe, #0a28e9);        display: flex;        justify-content: center;        align-items: center;        min-height: 100vh;        margin: 0;
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+	
+    
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: linear-gradient(to right top, #051937, #002364, #002b91, #002ebe, #0a28e9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
         box-sizing: border-box;
     }
+
     .logout-btn {
             position: absolute;
             top: 15px;
@@ -87,12 +119,6 @@
         font-size: 14px;
         box-sizing: border-box;
     }
-    /* Regra específica para a textarea com altura fixa */
-    textarea {
-        height: 38px; /* Altura fixa */
-        resize: none; /* Impede o redimensionamento pelo usuário */
-        overflow: hidden; /* Oculta o scrollbar se o conteúdo for maior que a altura */
-    }
     .generate-btn {
         background-color: #002b91;
         color: white;
@@ -146,7 +172,8 @@
             bottom: 0;
             left: 0;
             font-size: 14px;
-        }</style>
+        }
+</style>
 </head>
 <body>
 <div class="container">
@@ -158,7 +185,7 @@
             <select id="titulo">
                 <option value="Atenuação">Atenuação</option>
                 <option value="Rompimento">Rompimento</option>
-                <option value="Reparo de fibra">Reparo de fibra</option>
+		<option value="Reparo de fibra">Reparo de fibra</option>
                 <option value="Visita técnica">Visita técnica</option>
             </select>
         </div>
@@ -177,15 +204,11 @@
             <input type="text" id="descricao" required>
         </div>
         <div class="form-group">
-            <label for="testeRealizado">Teste Realizado</label>
-            <textarea id="testeRealizado" required></textarea>
-        </div>
-        <div class="form-group">
             <label for="periodo">Período</label>
             <select id="periodo">
                 <option value="Manhã">Manhã</option>
                 <option value="Tarde">Tarde</option>
-                <option value="Noite">Noite</option>
+		<option value="Noite">Noite</option>
                 <option value="Qualquer">Qualquer</option>
             </select>
         </div>
@@ -206,7 +229,7 @@
         <div class="form-group">
             <label for="telefone">Telefone</label>
             <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
-        </div>
+        </div>        
         <div class="form-group">
             <label for="atendente">Atendente</label>
             <select id="atendente">
@@ -214,10 +237,10 @@
                 <option value="Matheus">Matheus</option>
                 <option value="Ricardo">Ricardo</option>
                 <option value="Vinicius">Vinicius</option>
-                <option value="Leonardo">Leonardo</option>
-                <option value="Robson">Robson</option>
+		<option value="Leonardo">Leonardo</option>
+		<option value="Robson">Robson</option>
                 <option value="Paulo">Paulo</option>
-                <option value="Alessandro">Alessandro</option>
+		<option value="Alessandro">Alessandro</option>
             </select>
         </div>
     </div>
@@ -230,6 +253,8 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+</script>
 <script>
     flatpickr("#data", {
         locale: "pt",
@@ -237,41 +262,59 @@
         altInput: true,
         altFormat: "d/m",
     });
-
     function gerarScript() {
         const titulo = document.getElementById('titulo').value;
         const idOs = document.getElementById('idOs').value;
         const cliente = document.getElementById('cliente').value;
         const descricao = document.getElementById('descricao').value;
-        const testeRealizado = document.getElementById('testeRealizado').value; // Novo campo
         const periodo = document.getElementById('periodo').value;
         const data = document.getElementById('data').value;
         const obs = document.getElementById('obs').value;
         const telefone = document.getElementById('telefone').value;
         const endereco = document.getElementById('endereco').value;
         const atendente = document.getElementById('atendente').value;
-
         let script = idOs.trim() === "" ?
-            `-------------------------------------------\n${titulo}\nCLIENTE: ${cliente}\nDESCRIÇÃO: ${descricao}\nTESTE REALIZADO: ${testeRealizado}\nPERÍODO: ${periodo}\nDATA: ${data}\nOBS: ${obs}\nENDEREÇO: ${endereco}\nATENDENTE: ${atendente}\nTELEFONE: ${telefone}\n-------------------------------------------` :
-            `*${titulo}*\nID OS: ${idOs}\nCLIENTE: ${cliente}\nDESCRIÇÃO: ${descricao}\nTESTE REALIZADO: ${testeRealizado}\nPERÍODO: ${periodo}\nDATA: ${data}\nOBS: ${obs}\nENDEREÇO: ${endereco}\nATENDENTE: ${atendente}\nTELEFONE: ${telefone}`;
+            `-------------------------------------------
+${titulo}
+CLIENTE: ${cliente}
+DESCRIÇÃO: ${descricao}
+PERÍODO: ${periodo}
+DATA: ${data}
+OBS: ${obs}
+ENDEREÇO: ${endereco}
+ATENDENTE: ${atendente}
+TELEFONE: ${telefone}
+-------------------------------------------` :
+            `*${titulo}*
+ID OS: ${idOs}
+CLIENTE: ${cliente}
+DESCRIÇÃO: ${descricao}
+PERÍODO: ${periodo}
+DATA: ${data}
+OBS: ${obs}
+ENDEREÇO: ${endereco}
+ATENDENTE: ${atendente}
+TELEFONE: ${telefone}`;
 
         document.getElementById('output').textContent = script;
         document.getElementById('copyButton').style.display = 'inline-block';
     }
 
+    
     function copiarScript() {
         const outputText = document.getElementById('output').textContent;
         navigator.clipboard.writeText(outputText).then(() => {
+            // Exibe o alerta com estilo personalizado
             const alerta = document.createElement("div");
             alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
-            
+
             const alertaInner = document.createElement("div");
             alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #08D1A5; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
             alertaInner.textContent = "Máscara copiada!";
-            
+
             alerta.appendChild(alertaInner);
             document.body.appendChild(alerta);
-            
+            // Remove o alerta após 1 segundo
             setTimeout(() => {
                 alerta.remove();
             }, 1100);
@@ -279,13 +322,11 @@
             alert('Falha ao copiar: ' + error);
         });
     }
-
     function limparDados() {
         document.getElementById('titulo').value = '';
         document.getElementById('idOs').value = '';
         document.getElementById('cliente').value = '';
         document.getElementById('descricao').value = '';
-        document.getElementById('testeRealizado').value = '';
         document.getElementById('periodo').value = '';
         document.getElementById('data').value = '';
         document.getElementById('obs').value = '';
@@ -295,6 +336,46 @@
         document.getElementById('output').textContent = '';
         document.getElementById('copyButton').style.display = 'none';
     }
+
+
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
 </script>
 </body>
 </html>
