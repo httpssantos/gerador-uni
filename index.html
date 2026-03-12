@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,184 +7,232 @@
     <link rel="shortcut icon" type="imagex/jpeg" href="https://internetmais.net/wp-content/uploads/2018/05/Logo_internet_MAIS.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>Gerador de OS</title>
+
     <script>
-async function logIP() {
-  try {
-    const response = await fetch('/api/ip');
-    const { ip } = await response.json();
-    console.log("IP capturado:", ip);
-    
-    gtag('event', 'ip_capture', { ip_address: ip });
-    
-  } catch (error) {
-    console.error("Erro ao capturar IP:", error);
-  }
-}
-logIP();
-</script>
-
-
+    async function logIP() {
+      try {
+        const response = await fetch('/api/ip');
+        const { ip } = await response.json();
+        console.log("IP capturado:", ip);
+        gtag('event', 'ip_capture', { ip_address: ip });
+      } catch (error) {
+        console.error("Erro ao capturar IP:", error);
+      }
+    }
+    logIP();
+    </script>
 
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-	
-    
+
     <style>
+    * {
+        box-sizing: border-box;
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        background-image: linear-gradient(to right top, #051937, #002364, #002b91, #002ebe, #0a28e9);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top left, #0a28e9 0, #051937 55%, #020817 100%);
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
         margin: 0;
-        box-sizing: border-box;
+        color: #0f172a;
     }
-
-    .logout-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px; /* Posiciona no canto esquerdo */
-            background-color: #dc3545; /* Cor vermelha para destaque */
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .logout-btn:hover {
-            background-color: #c12a36; /* Tom de vermelho mais escuro */
-        }
 
     .container {
         width: 100%;
-        max-width: 800px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 720px;
+        padding: 24px 28px 20px;
+        background: rgba(15, 23, 42, 0.85);
+        border-radius: 18px;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 18px;
         position: relative;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        backdrop-filter: blur(16px);
     }
+
     h1 {
-        text-align: center;
-        color: #333;
+        text-align: left;
+        color: #e5e7eb;
         font-size: 20px;
-        margin: 0;
+        margin: 0 0 4px;
+        letter-spacing: 0.02em;
     }
+
+    .subtitle {
+        font-size: 12px;
+        color: #9ca3af;
+        margin-bottom: 8px;
+    }
+
     .clear-btn {
         position: absolute;
-        top: 15px;
-        right: 15px;
-        background-color: #002b91;
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
+        top: 18px;
+        right: 18px;
+        background: rgba(15, 23, 42, 0.0);
+        color: #e5e7eb;
+        padding: 5px 11px;
+        border-radius: 999px;
         cursor: pointer;
         font-size: 12px;
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
     }
+
     .clear-btn:hover {
-        background-color: #002b91;
+        background: rgba(15, 23, 42, 0.85);
+        border-color: rgba(148, 163, 184, 0.9);
     }
+
     .form-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px 12px;
     }
+
     .form-group {
-        flex: 1;
-        min-width: 150px;
+        min-width: 0;
     }
+
     label {
         font-weight: 500;
-        color: #333;
-        font-size: 14px;
-        margin-bottom: 5px;
+        color: #e5e7eb;
+        font-size: 13px;
+        margin-bottom: 4px;
         display: block;
     }
+
     input, select, textarea {
         width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid #1f2937;
+        background: rgba(15, 23, 42, 0.9);
+        color: #e5e7eb;
         font-size: 14px;
         box-sizing: border-box;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
+
+    input::placeholder {
+        color: #6b7280;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.7);
+        background: rgba(15, 23, 42, 0.95);
+    }
+
     .generate-btn {
-        background-color: #002b91;
-        color: white;
-        padding: 8px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: #f9fafb;
+        padding: 9px 12px;
         border: none;
-        border-radius: 4px;
+        border-radius: 999px;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 14px;
+        font-weight: 600;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 4px;
+        letter-spacing: 0.02em;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+        transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
     }
+
     .generate-btn:hover {
-        background-color: #002b91;
+        transform: translateY(-1px);
+        box-shadow: 0 14px 30px rgba(37, 99, 235, 0.6);
+        filter: brightness(1.06);
     }
+
     .output {
-        margin-top: 15px;
-        padding: 10px;
-        background-color: #f1f1f1;
-        border-radius: 4px;
+        margin-top: 10px;
+        padding: 10px 12px;
+        background: rgba(15, 23, 42, 0.85);
+        border-radius: 12px;
         word-wrap: break-word;
         white-space: pre-wrap;
         font-size: 13px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        color: #e5e7eb;
     }
+
     .copy-btn {
-        background-color: #002b91;
-        color: white;
-        padding: 8px;
-        border: none;
-        border-radius: 4px;
+        background: rgba(15, 23, 42, 0.0);
+        color: #e5e7eb;
+        padding: 8px 11px;
+        border-radius: 999px;
         cursor: pointer;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 8px;
         font-size: 13px;
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
     }
+
     .copy-btn:hover {
-        background-color: #002b91;
+        background: rgba(15, 23, 42, 0.85);
+        border-color: rgba(148, 163, 184, 0.9);
     }
-    /* Responsividade para telas menores */
-    @media (max-width: 600px) {
+
+    @media (max-width: 720px) {
+        .container {
+            margin: 12px;
+            padding: 20px 18px 16px;
+        }
         .form-row {
-            flex-direction: column;
+            grid-template-columns: 1fr;
+        }
+        .clear-btn {
+            display: none;
         }
     }
+
     footer {
-            width: 100%;
-            text-align: center;
-            padding: 3px;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            font-size: 14px;
-        }
-</style>
+        width: 100%;
+        text-align: center;
+        padding: 6px 8px;
+        background-color: transparent;
+        color: #9ca3af;
+        position: fixed;
+        bottom: 8px;
+        left: 0;
+        font-size: 12px;
+    }
+    </style>
 </head>
 <body>
+
 <div class="container">
     <h1>Gerador de OS</h1>
-    <button class="clear-btn" onclick="limparDados()">Limpar Dados</button>
+    <p class="subtitle">Preencha os campos abaixo e clique em Gerar Script.</p>
+
+    <button class="clear-btn" onclick="limparDados()">Limpar dados</button>
+
     <div class="form-row">
         <div class="form-group">
             <label for="titulo">Título</label>
             <select id="titulo">
                 <option value="Atenuação">Atenuação</option>
                 <option value="Rompimento">Rompimento</option>
-		<option value="Reparo de fibra">Reparo de fibra</option>
+                <option value="Reparo de fibra">Reparo de fibra</option>
                 <option value="Visita técnica">Visita técnica</option>
             </select>
         </div>
@@ -198,6 +245,7 @@ logIP();
             <input type="text" id="cliente" required>
         </div>
     </div>
+
     <div class="form-row">
         <div class="form-group">
             <label for="descricao">Descrição</label>
@@ -208,7 +256,7 @@ logIP();
             <select id="periodo">
                 <option value="Manhã">Manhã</option>
                 <option value="Tarde">Tarde</option>
-		<option value="Noite">Noite</option>
+                <option value="Noite">Noite</option>
                 <option value="Qualquer">Qualquer</option>
             </select>
         </div>
@@ -217,6 +265,7 @@ logIP();
             <input type="date" id="data" required>
         </div>
     </div>
+
     <div class="form-row">
         <div class="form-group">
             <label for="obs">Observação</label>
@@ -237,24 +286,26 @@ logIP();
                 <option value="Matheus">Matheus</option>
                 <option value="Ricardo">Ricardo</option>
                 <option value="Vinicius">Vinicius</option>
-		<option value="Leonardo">Leonardo</option>
-		<option value="Robson">Robson</option>
+                <option value="Leonardo">Leonardo</option>
+                <option value="Robson">Robson</option>
                 <option value="Paulo">Paulo</option>
-		<option value="Alessandro">Alessandro</option>
+                <option value="Alessandro">Alessandro</option>
             </select>
         </div>
     </div>
+
     <button class="generate-btn" onclick="gerarScript()">Gerar Script</button>
     <div class="output" id="output"></div>
     <button class="copy-btn" id="copyButton" onclick="copiarScript()" style="display:none;">Copiar Script</button>
 </div>
+
 <footer>
     Todos os direitos reservados - 2025 - PP
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
-</script>
 <script>
     flatpickr("#data", {
         locale: "pt",
@@ -262,6 +313,7 @@ logIP();
         altInput: true,
         altFormat: "d/m",
     });
+
     function gerarScript() {
         const titulo = document.getElementById('titulo').value;
         const idOs = document.getElementById('idOs').value;
@@ -273,48 +325,41 @@ logIP();
         const telefone = document.getElementById('telefone').value;
         const endereco = document.getElementById('endereco').value;
         const atendente = document.getElementById('atendente').value;
+
         let script = idOs.trim() === "" ?
-            `-------------------------------------------
-${titulo}
-CLIENTE: ${cliente}
-DESCRIÇÃO: ${descricao}
-PERÍODO: ${periodo}
-DATA: ${data}
-OBS: ${obs}
-ENDEREÇO: ${endereco}
-ATENDENTE: ${atendente}
-TELEFONE: ${telefone}
--------------------------------------------` :
-            `*${titulo}*
-ID OS: ${idOs}
-CLIENTE: ${cliente}
-DESCRIÇÃO: ${descricao}
-PERÍODO: ${periodo}
-DATA: ${data}
-OBS: ${obs}
-ENDEREÇO: ${endereco}
-ATENDENTE: ${atendente}
-TELEFONE: ${telefone}`;
+            `-------------------------------------------\n${titulo}\nCLIENTE: ${cliente}\nDESCRIÇÃO: ${descricao}\nPERÍODO: ${periodo}\nDATA: ${data}\nOBS: ${obs}\nENDEREÇO: ${endereco}\nATENDENTE: ${atendente}\nTELEFONE: ${telefone}\n-------------------------------------------` :
+            `${titulo}\nID OS: ${idOs}\nCLIENTE: ${cliente}\nDESCRIÇÃO: ${descricao}\nPERÍODO: ${periodo}\nDATA: ${data}\nOBS: ${obs}\nENDEREÇO: ${endereco}\nATENDENTE: ${atendente}\nTELEFONE: ${telefone}`;
 
         document.getElementById('output').textContent = script;
-        document.getElementById('copyButton').style.display = 'inline-block';
+        document.getElementById('copyButton').style.display = 'inline-flex';
     }
 
-    
     function copiarScript() {
         const outputText = document.getElementById('output').textContent;
         navigator.clipboard.writeText(outputText).then(() => {
-            // Exibe o alerta com estilo personalizado
             const alerta = document.createElement("div");
-            alerta.style.cssText = "display: block; position: fixed; top: 0; left: 20%; right: 20%; width: 60%; padding-top: 10px; z-index: 9999";
+            alerta.style.cssText = `
+                position: fixed;
+                inset: 16px 16px auto;
+                display: flex;
+                justify-content: center;
+                z-index: 9999;
+            `;
 
             const alertaInner = document.createElement("div");
-            alertaInner.style.cssText = "margin: 0 auto; box-shadow: 1px 1px 5px black; padding: 10px; background-color: #08D1A5; color: white; text-align: center; font-size: 14px; border-radius: 4px;";
+            alertaInner.style.cssText = `
+                padding: 8px 14px;
+                border-radius: 999px;
+                background: rgba(16, 185, 129, 0.95);
+                color: #ecfdf5;
+                font-size: 13px;
+                box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+            `;
             alertaInner.textContent = "Máscara copiada!";
 
             alerta.appendChild(alertaInner);
             document.body.appendChild(alerta);
-            // Remove o alerta após 1 segundo
+
             setTimeout(() => {
                 alerta.remove();
             }, 1100);
@@ -322,60 +367,21 @@ TELEFONE: ${telefone}`;
             alert('Falha ao copiar: ' + error);
         });
     }
+
     function limparDados() {
-        document.getElementById('titulo').value = '';
+        document.getElementById('titulo').value = 'Atenuação';
         document.getElementById('idOs').value = '';
         document.getElementById('cliente').value = '';
         document.getElementById('descricao').value = '';
-        document.getElementById('periodo').value = '';
+        document.getElementById('periodo').value = 'Manhã';
         document.getElementById('data').value = '';
         document.getElementById('obs').value = '';
         document.getElementById('endereco').value = '';
         document.getElementById('telefone').value = '';
-        document.getElementById('atendente').value = '';
+        document.getElementById('atendente').value = 'Pedro';
         document.getElementById('output').textContent = '';
         document.getElementById('copyButton').style.display = 'none';
     }
-
-
-</script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
 </script>
 </body>
 </html>
